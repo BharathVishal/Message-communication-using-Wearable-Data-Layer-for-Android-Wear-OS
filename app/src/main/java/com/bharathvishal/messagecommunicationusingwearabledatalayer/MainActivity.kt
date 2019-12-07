@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
@@ -23,14 +24,17 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
     private val wearableAppCheckPayloadReturnACK = "AppOpenWearableACK"
     private var wearableDeviceConnected: Boolean = false
 
+    private var messageEventObject: MessageEvent? = null
 
     //This string holds the file names of the received images on the wearable device
-    private val currentlyReceievedMessageFromWear: String? = null
+    private var currentlyReceievedMessageFromWear: String? = null
     //This string holds the acknowledgement payload response sent from wear
-    private val currentAckFromWearForAppOpenCheck: String? = null
+    private var currentAckFromWearForAppOpenCheck: String? = null
     private val APP_OPEN_WEARABLE_PAYLOAD_PATH = "/APP_OPEN_WEARABLE_PAYLOAD"
 
     private val TAG_GET_NODES: String = "getnodes1"
+
+    private val TAG_MESSAGE_RECEIVED: String = "receive1"
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,50 +45,56 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
         wearableDeviceConnected = false
 
         checkwearablesButton.setOnClickListener {
-            val tempAct: Activity = activityContext as MainActivity
-            AsyncTask.execute {
-                try {
-                    val getNodesResBool =
-                        getNodes(tempAct.applicationContext)
+            if (!wearableDeviceConnected) {
+                val tempAct: Activity = activityContext as MainActivity
+                AsyncTask.execute {
+                    try {
+                        val getNodesResBool =
+                            getNodes(tempAct.applicationContext)
 
-                    if (getNodesResBool!![0]) {
-                        //if message Acknowlegement Received
-                        if (getNodesResBool[1]) {
-                            Toast.makeText(
-                                activityContext,
-                                "Wearable device paired and app is open. Tap the \"Send Message to Wearable\" button to send the message to your wearable device.",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            deviceconnectionStatusTv.text =
-                                "Wearable device paired and app is open."
-                            deviceconnectionStatusTv.visibility = View.VISIBLE
-                            wearableDeviceConnected = true
-                            sendmessageButton.visibility = View.VISIBLE
-                        } else {
-                            Toast.makeText(
-                                activityContext,
-                                "A wearable device is paired but the wearable app on your watch isn't open. Launch the wearable app and try again.",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            deviceconnectionStatusTv.text =
-                                "Wearable device paired but app isn't open."
-                            deviceconnectionStatusTv.visibility = View.VISIBLE
-                            wearableDeviceConnected = false
-                            sendmessageButton.visibility = View.GONE
+                        //UI thread
+                        tempAct.runOnUiThread {
+                            if (getNodesResBool!![0]) {
+                                //if message Acknowlegement Received
+                                if (getNodesResBool[1]) {
+                                    Toast.makeText(
+                                        activityContext,
+                                        "Wearable device paired and app is open. Tap the \"Send Message to Wearable\" button to send the message to your wearable device.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    deviceconnectionStatusTv.text =
+                                        "Wearable device paired and app is open."
+                                    deviceconnectionStatusTv.visibility = View.VISIBLE
+                                    wearableDeviceConnected = true
+                                    sendmessageButton.visibility = View.VISIBLE
+                                } else {
+                                    Toast.makeText(
+                                        activityContext,
+                                        "A wearable device is paired but the wearable app on your watch isn't open. Launch the wearable app and try again.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    deviceconnectionStatusTv.text =
+                                        "Wearable device paired but app isn't open."
+                                    deviceconnectionStatusTv.visibility = View.VISIBLE
+                                    wearableDeviceConnected = false
+                                    sendmessageButton.visibility = View.GONE
+                                }
+                            } else {
+                                Toast.makeText(
+                                    activityContext,
+                                    "No wearable device paired. Pair a wearable device to your phone using the Wear OS app and try again.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                deviceconnectionStatusTv.text =
+                                    "Wearable device not paired and connected."
+                                deviceconnectionStatusTv.visibility = View.VISIBLE
+                                wearableDeviceConnected = false
+                                sendmessageButton.visibility = View.GONE
+                            }
                         }
-                    } else {
-                        Toast.makeText(
-                            activityContext,
-                            "No wearable device paired. Pair a wearable device to your phone using the Wear OS app and try again.",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        deviceconnectionStatusTv.text = "Wearable device not paired and connected."
-                        deviceconnectionStatusTv.visibility = View.VISIBLE
-                        wearableDeviceConnected = false
-                        sendmessageButton.visibility = View.GONE
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
             }
         }
@@ -94,6 +104,31 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
         sendmessageButton.setOnClickListener {
             if (wearableDeviceConnected) {
                 //Send message to the wearable device
+
+                var path: String? = uri.path
+
+                // Get the node id of the node that created the data item from the host portion of
+                // the uri.
+                val nodeId: String = uri.host.toString()
+                // Set the data of the message to be the bytes of the Uri.
+                val payload: ByteArray = photoName.toByteArray()
+
+                // Send the rpc
+                // Instantiates clients without member variables, as clients are inexpensive to
+                // create. (They are cached and shared between GoogleApi instances.)
+                val sendMessageTask =
+                    Wearable.getMessageClient(con)
+                        .sendMessage(nodeId, DATA_ITEM_RECEIVED_PATH, payload)
+
+                sendMessageTask.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Log.d("receive1", "Message sent successfully")
+                    } else {
+                        Log.d("receive1", "Message failed.")
+                    }
+                }
+
+
             }
         }
 
@@ -203,7 +238,39 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
     override fun onDataChanged(p0: DataEventBuffer) {
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onMessageReceived(p0: MessageEvent) {
+        try {
+            val s =
+                String(p0.data, StandardCharsets.UTF_8)
+            val messageEventPath: String = p0.path
+            Log.d(
+                TAG_MESSAGE_RECEIVED,
+                "onMessageReceived() Received a message from watch:"
+                        + p0.requestId
+                        + " "
+                        + messageEventPath
+                        + " "
+                        + s
+            )
+            if (messageEventPath == APP_OPEN_WEARABLE_PAYLOAD_PATH) {
+                currentAckFromWearForAppOpenCheck = s
+                Log.d(
+                    TAG_MESSAGE_RECEIVED,
+                    "Received acknowledgement message that app is open in wear"
+                )
+                val sbTemp = StringBuilder()
+                sbTemp.append(messagelogTextView.text.toString())
+                sbTemp.append("\nWearable device connected.")
+                Log.d("receive1", " $sbTemp")
+                messagelogTextView.text = sbTemp
+                messageEventObject=p0
+                messageEventObject.pa
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d("receive1", "Handled")
+        }
     }
 
     override fun onCapabilityChanged(p0: CapabilityInfo) {

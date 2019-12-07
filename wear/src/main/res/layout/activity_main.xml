@@ -21,6 +21,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
+                android:keepScreenOn="true"
                 android:layout_height="wrap_content">
 
                 <LinearLayout

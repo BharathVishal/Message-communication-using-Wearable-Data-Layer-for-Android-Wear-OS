@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:keepScreenOn="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,14 +41,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/messagelogTextView"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="225dp"
-                    android:scrollbars="vertical"
-                    android:text="..."
-                    android:textColor="?TextViewHeaderColor" />
+                    android:layout_height="225dp">
 
+                    <TextView
+                        android:id="@+id/messagelogTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:text="..."
+                        android:textColor="?TextViewHeaderColor"
+                        android:textSize="12sp" />
+                </ScrollView>
             </LinearLayout>
 
 
@@ -61,12 +67,12 @@
                     android:id="@+id/deviceconnectionStatusTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:gravity="center"
                     android:scrollbars="vertical"
                     android:text="@string/wearable_device_is_connected"
                     android:textColor="?TextViewHeaderColor"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -128,11 +134,11 @@
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:scrollbars="vertical"
-                    android:visibility="gone"
                     android:text="Send Message to Wearable"
                     android:textColor="?TextInfoColor"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
