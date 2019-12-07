@@ -61,6 +61,7 @@
                     android:id="@+id/deviceconnectionStatusTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:scrollbars="vertical"
                     android:text="@string/wearable_device_is_connected"
@@ -102,8 +103,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/checkwearablesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:scrollbars="vertical"
+                    android:text="Check for connected wearables"
+                    android:textColor="?TextInfoColor"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/sendmessageButton"
@@ -113,6 +128,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:scrollbars="vertical"
+                    android:visibility="gone"
                     android:text="Send Message to Wearable"
                     android:textColor="?TextInfoColor"
                     android:textSize="15sp"
