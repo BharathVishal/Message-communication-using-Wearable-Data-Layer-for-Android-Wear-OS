@@ -9,9 +9,11 @@ A two way message communication app for Wear OS that makes use of Wearable data 
 2. Modify the code to suit your needs.
 3. Watch out for more features.
 
-To send/receive images:
+### To send/receive images:
 1. Install the app on your wearable and mobile device.
-2. Pair your wearable device with your mobile through 
+2. Important - Make sure your watch is paired with your mobile device through bluetooth. You can pair your watch with your phone through the 'Wear OS' app.
+3. Once the device is paired, tap the 'Check for connected wearables' button in the mobile app.
+4. Finally type your message and send the message to your wearable device. You can follow the same to send a message from your wearable device to your mobile device. 
 
 &nbsp;
 ### Features :
