@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
 import android.view.View
+import android.widget.ScrollView
 import android.widget.Toast
 import com.google.android.gms.wearable.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -76,10 +77,7 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
 
                             scrollviewTextMessageLog.requestFocus()
                             scrollviewTextMessageLog.post {
-                                scrollviewTextMessageLog.scrollTo(
-                                    0,
-                                    scrollviewTextMessageLog.bottom
-                                )
+                                scrollviewTextMessageLog.fullScroll(ScrollView.FOCUS_DOWN)
                             }
                         } else {
                             Log.d("send1", "Message failed.")
@@ -188,9 +186,10 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
                     Log.d("receive1", " $sbTemp")
                     messagelogTextView.append(sbTemp)
 
+
                     scrollviewTextMessageLog.requestFocus()
                     scrollviewTextMessageLog.post {
-                        scrollviewTextMessageLog.scrollTo(0, scrollviewTextMessageLog.bottom)
+                        scrollviewTextMessageLog.fullScroll(ScrollView.FOCUS_DOWN)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
