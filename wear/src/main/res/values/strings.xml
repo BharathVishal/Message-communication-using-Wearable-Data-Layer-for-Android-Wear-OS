@@ -9,4 +9,7 @@
     <string name="mobile_message">Mobile message</string>
     <string name="phone_message">Phone Message</string>
     <string name="message">Message Content</string>
+    <string name="message_log">Message log</string>
+    <string name="init">...</string>
+    <string name="send_message_to_phone">Send Message to Phone</string>
 </resources>

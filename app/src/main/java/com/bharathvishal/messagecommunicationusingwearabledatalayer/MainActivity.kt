@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -25,10 +24,6 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
     private val wearableAppCheckPayloadReturnACK = "AppOpenWearableACK"
     private var wearableDeviceConnected: Boolean = false
 
-
-    //This string holds the file names of the received images on the wearable device
-    private var currentlyReceievedMessageFromWear: String? = null
-    //This string holds the acknowledgement payload response sent from wear
     private var currentAckFromWearForAppOpenCheck: String? = null
     private val APP_OPEN_WEARABLE_PAYLOAD_PATH = "/APP_OPEN_WEARABLE_PAYLOAD"
 
@@ -36,7 +31,6 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
 
     private val TAG_GET_NODES: String = "getnodes1"
     private val TAG_MESSAGE_RECEIVED: String = "receive1"
-
 
     private var messageEvent: MessageEvent? = null
     private var wearableNodeUri: String? = null
@@ -110,11 +104,6 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
         sendmessageButton.setOnClickListener {
             if (wearableDeviceConnected) {
                 if (messagecontentEditText?.text!!.isNotEmpty()) {
-                    //Send message to the wearable device
-                    var path: String? = messageEvent?.path
-
-                    // Get the node id of the node that created the data item from the host portion of
-                    // the uri.
 
                     val nodeId: String = messageEvent?.sourceNodeId!!
                     // Set the data of the message to be the bytes of the Uri.
@@ -135,7 +124,7 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                             sbTemp.append(messagecontentEditText.text.toString())
                             sbTemp.append(" (Sent to Wearable)")
                             Log.d("receive1", " $sbTemp")
-                            messagelogTextView.append(sbTemp)
+                            messagelogTextView?.append(sbTemp)
 
                             scrollviewText.requestFocus()
                             scrollviewText.post {

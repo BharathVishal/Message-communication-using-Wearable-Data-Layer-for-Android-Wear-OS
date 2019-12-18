@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Message log"
+                    android:text="@string/message_log"
                     android:textColor="?TextInfoColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -51,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scrollbars="vertical"
-                        android:text="..."
+                        android:text="@string/init"
                         android:textColor="?TextViewHeaderColor"
                         android:textSize="12sp" />
                 </ScrollView>
@@ -124,7 +123,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:scrollbars="vertical"
-                    android:text="Check for connected wearables"
+                    android:text="@string/check_for_connected_wearables"
                     android:textColor="?TextInfoColor"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -137,7 +136,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:scrollbars="vertical"
-                    android:text="Send Message to Wearable"
+                    android:text="@string/send_message_alt"
                     android:textColor="?TextInfoColor"
                     android:textSize="15sp"
                     android:textStyle="bold"

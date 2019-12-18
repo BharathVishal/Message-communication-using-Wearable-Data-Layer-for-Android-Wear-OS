@@ -1,5 +1,6 @@
 package com.bharathvishal.messagecommunicationusingwearabledatalayer
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -24,7 +25,6 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
 
 
     // Payload string items
-    var wearableAppCheckPayload = "AppOpenWearable"
     private val wearableAppCheckPayloadReturnACK = "AppOpenWearableACK"
 
     private val MESSAGE_ITEM_RECEIVED_PATH: String = "/message-item-received"
@@ -46,11 +46,6 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
         sendmessageButton.setOnClickListener {
             if (mobileDeviceConnected) {
                 if (messagecontentEditText?.text!!.isNotEmpty()) {
-                    //Send message to the wearable device
-                    var path: String? = messageEvent?.path
-
-                    // Get the node id of the node that created the data item from the host portion of
-                    // the uri.
 
                     val nodeId: String = messageEvent?.sourceNodeId!!
                     // Set the data of the message to be the bytes of the Uri.
@@ -101,10 +96,11 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onMessageReceived(p0: MessageEvent) {
         try {
             Log.d(TAG_MESSAGE_RECEIVED, "onMessageReceived event received")
-            val s1: String = String(p0.data, StandardCharsets.UTF_8)
+            val s1 = String(p0.data, StandardCharsets.UTF_8)
             val messageEventPath: String = p0.path
 
             Log.d(
