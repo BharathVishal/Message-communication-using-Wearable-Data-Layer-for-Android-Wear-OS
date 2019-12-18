@@ -30,8 +30,8 @@ A two way message communication app for Wear OS that makes use of Wearable data 
 
 &nbsp;
 ### Screenshots : 
-![Screenshot 1](https://github.com/BharathVishal/Message-communication-using-Wearable-Data-Layer/blob/master/Screenshots/1.png?s=10)
 ![Screenshot 2](https://github.com/BharathVishal/Message-communication-using-Wearable-Data-Layer/blob/master/Screenshots/2.png?s=10)
+![Screenshot 1](https://github.com/BharathVishal/Message-communication-using-Wearable-Data-Layer/blob/master/Screenshots/1.png?s=10)
 
 
 
