@@ -4,5 +4,5 @@
     <string name="tap_to_edit_message">Tap to edit message</string>
     <string name="send_message_to_wearable">Send message to wearable</string>
     <string name="wearable_message">Wearable message</string>
-    <string name="message">Message</string>
+    <string name="message">Message content</string>
 </resources>

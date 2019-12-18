@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?CardBGColor"
-    android:padding="10dp"
+    android:padding="9dp"
     tools:deviceIds="wear">
 
     <FrameLayout
@@ -19,11 +19,6 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:keepScreenOn="true"
-                android:layout_height="wrap_content">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -32,9 +27,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -43,7 +37,7 @@
                             android:gravity="center"
                             android:text="Message log"
                             android:textColor="?TextInfoColor"
-                            android:textSize="12sp"
+                            android:textSize="11sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -51,17 +45,28 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:paddingTop="5dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/messagelogTextView"
+                        <ScrollView
+                            android:id="@+id/scrollviewTextMessageLog"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:scrollbars="vertical"
-                            android:text="..."
-                            android:textColor="?TextViewHeaderColor"
-                            android:textSize="10.5sp" />
+                            android:layout_height="45dp"
+                            android:paddingBottom="4dp"
+                            android:scrollbars="vertical">
+
+                            <TextView
+                                android:id="@+id/messagelogTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="9dp"
+                                android:paddingEnd="9dp"
+                                android:scrollbars="vertical"
+                                android:text="..."
+                                android:textColor="?TextViewHeaderColor"
+                                android:textSize="12sp" />
+                        </ScrollView>
 
                     </LinearLayout>
 
@@ -80,7 +85,8 @@
                             android:scrollbars="vertical"
                             android:text="@string/mobile_device_is_connected"
                             android:textColor="?TextViewHeaderColor"
-                            android:textSize="11sp" />
+                            android:textSize="10sp"
+                            android:visibility="visible" />
 
                     </LinearLayout>
 
@@ -92,10 +98,12 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/message"
-                            android:textColorHint="?TextViewHeaderColor">
+                            android:textColorHint="?TextViewHeaderColor"
+                            android:visibility="invisible">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/messagecontentEditText"
@@ -116,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="1dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginBottom="25dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -132,15 +140,13 @@
                             android:text="Send Message to Phone"
                             android:textColor="?TextInfoColor"
                             android:textSize="10.5sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="visible" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
-
-            </ScrollView>
 
         </RelativeLayout>
 

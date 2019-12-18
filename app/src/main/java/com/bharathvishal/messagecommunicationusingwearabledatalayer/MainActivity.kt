@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
     private val wearableAppCheckPayloadReturnACK = "AppOpenWearableACK"
     private var wearableDeviceConnected: Boolean = false
 
-    private var messageEventObject: MessageEvent? = null
 
     //This string holds the file names of the received images on the wearable device
     private var currentlyReceievedMessageFromWear: String? = null
@@ -32,9 +32,15 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
     private var currentAckFromWearForAppOpenCheck: String? = null
     private val APP_OPEN_WEARABLE_PAYLOAD_PATH = "/APP_OPEN_WEARABLE_PAYLOAD"
 
-    private val TAG_GET_NODES: String = "getnodes1"
+    private val MESSAGE_ITEM_RECEIVED_PATH: String = "/message-item-received"
 
+    private val TAG_GET_NODES: String = "getnodes1"
     private val TAG_MESSAGE_RECEIVED: String = "receive1"
+
+
+    private var messageEvent: MessageEvent? = null
+    private var wearableNodeUri: String? = null
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,31 +109,49 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
 
         sendmessageButton.setOnClickListener {
             if (wearableDeviceConnected) {
-                //Send message to the wearable device
+                if (messagecontentEditText?.text!!.isNotEmpty()) {
+                    //Send message to the wearable device
+                    var path: String? = messageEvent?.path
 
-                var path: String? = uri.path
+                    // Get the node id of the node that created the data item from the host portion of
+                    // the uri.
 
-                // Get the node id of the node that created the data item from the host portion of
-                // the uri.
-                val nodeId: String = uri.host.toString()
-                // Set the data of the message to be the bytes of the Uri.
-                val payload: ByteArray = photoName.toByteArray()
+                    val nodeId: String = messageEvent?.sourceNodeId!!
+                    // Set the data of the message to be the bytes of the Uri.
+                    val payload: ByteArray = messagecontentEditText?.text.toString().toByteArray()
 
-                // Send the rpc
-                // Instantiates clients without member variables, as clients are inexpensive to
-                // create. (They are cached and shared between GoogleApi instances.)
-                val sendMessageTask =
-                    Wearable.getMessageClient(con)
-                        .sendMessage(nodeId, DATA_ITEM_RECEIVED_PATH, payload)
+                    // Send the rpc
+                    // Instantiates clients without member variables, as clients are inexpensive to
+                    // create. (They are cached and shared between GoogleApi instances.)
+                    val sendMessageTask =
+                        Wearable.getMessageClient(activityContext!!)
+                            .sendMessage(nodeId, MESSAGE_ITEM_RECEIVED_PATH, payload)
 
-                sendMessageTask.addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Log.d("receive1", "Message sent successfully")
-                    } else {
-                        Log.d("receive1", "Message failed.")
+                    sendMessageTask.addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Log.d("send1", "Message sent successfully")
+                            val sbTemp = StringBuilder()
+                            sbTemp.append("\n")
+                            sbTemp.append(messagecontentEditText.text.toString())
+                            sbTemp.append(" (Sent to Wearable)")
+                            Log.d("receive1", " $sbTemp")
+                            messagelogTextView.append(sbTemp)
+
+                            scrollviewText.requestFocus()
+                            scrollviewText.post {
+                                scrollviewText.scrollTo(0, scrollviewText.bottom)
+                            }
+                        } else {
+                            Log.d("send1", "Message failed.")
+                        }
                     }
+                } else {
+                    Toast.makeText(
+                        activityContext,
+                        "Message content is empty. Please enter some message and proceed",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
 
             }
         }
@@ -259,13 +283,38 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                     TAG_MESSAGE_RECEIVED,
                     "Received acknowledgement message that app is open in wear"
                 )
+
                 val sbTemp = StringBuilder()
                 sbTemp.append(messagelogTextView.text.toString())
                 sbTemp.append("\nWearable device connected.")
                 Log.d("receive1", " $sbTemp")
                 messagelogTextView.text = sbTemp
-                messageEventObject=p0
-                messageEventObject.pa
+                textInputLayout.visibility = View.VISIBLE
+
+                checkwearablesButton?.visibility = View.GONE
+                messageEvent = p0
+                wearableNodeUri = p0.sourceNodeId
+            } else if (messageEventPath.isNotEmpty() && messageEventPath == MESSAGE_ITEM_RECEIVED_PATH) {
+
+                try {
+                    messagelogTextView.visibility = View.VISIBLE
+                    textInputLayout?.visibility = View.VISIBLE
+                    sendmessageButton?.visibility = View.VISIBLE
+
+                    val sbTemp = StringBuilder()
+                    sbTemp.append("\n")
+                    sbTemp.append(s)
+                    sbTemp.append(" - (Received from wearable)")
+                    Log.d("receive1", " $sbTemp")
+                    messagelogTextView.append(sbTemp)
+
+                    scrollviewText.requestFocus()
+                    scrollviewText.post {
+                        scrollviewText.scrollTo(0, scrollviewText.bottom)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
