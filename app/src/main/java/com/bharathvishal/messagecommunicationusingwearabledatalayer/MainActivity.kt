@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
         activityContext = this
         wearableDeviceConnected = false
 
+
         checkwearablesButton.setOnClickListener {
             if (!wearableDeviceConnected) {
                 val tempAct: Activity = activityContext as MainActivity
@@ -141,10 +142,8 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
             }
         }
-
     }
 
 
@@ -181,46 +180,46 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                         Log.d(TAG_GET_NODES, "send message result : $result")
                         resBool[0] = true
                         //Wait for 1000 ms/1 sec for the acknowledgement message
-                        //Quantum 1
+                        //Wait 1
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(100)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep quantum 1")
+                            Log.d(TAG_GET_NODES, "ACK thread sleep 1")
                         }
                         if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
                             resBool[1] = true
                             return resBool
                         }
-                        //Quantum 2
+                        //Wait 2
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(150)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep quantum 2")
+                            Log.d(TAG_GET_NODES, "ACK thread sleep 2")
                         }
                         if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
                             resBool[1] = true
                             return resBool
                         }
-                        //Quantum 3
+                        //Wait 3
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(200)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep quantum 3")
+                            Log.d(TAG_GET_NODES, "ACK thread sleep 3")
                         }
                         if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
                             resBool[1] = true
                             return resBool
                         }
-                        //Quantum 4
+                        //Wait 4
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(250)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep quantum 4")
+                            Log.d(TAG_GET_NODES, "ACK thread sleep 4")
                         }
                         if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
                             resBool[1] = true
                             return resBool
                         }
-                        //Quantum 5
+                        //Wait 5
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(350)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep quantum 5")
+                            Log.d(TAG_GET_NODES, "ACK thread sleep 5")
                         }
                         if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
                             resBool[1] = true
@@ -232,7 +231,6 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                             "ACK thread timeout, no message received from the wearable "
                         )
                     } catch (exception: Exception) {
-                        Log.d(TAG_GET_NODES, "send message exception")
                         exception.printStackTrace()
                     }
                 } catch (e1: Exception) {

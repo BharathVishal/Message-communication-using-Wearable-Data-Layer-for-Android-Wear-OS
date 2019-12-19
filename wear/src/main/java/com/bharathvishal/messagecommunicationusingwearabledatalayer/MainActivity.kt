@@ -42,7 +42,7 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
         activityContext = this
 
 
-
+        //On click listener for sendmessage button
         sendmessageButton.setOnClickListener {
             if (mobileDeviceConnected) {
                 if (messagecontentEditText?.text!!.isNotEmpty()) {
@@ -113,8 +113,7 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
                         + s1
             )
 
-            //If the payload of the messagge is "AppOpenWeable"
-            //Then send back a message back to the source node
+            //Send back a message back to the source node
             //This acknowledges that the receiver activity is open
             if (messageEventPath.isNotEmpty() && messageEventPath == APP_OPEN_WEARABLE_PAYLOAD_PATH) {
                 try {
