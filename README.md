@@ -1,5 +1,4 @@
 # Message communication using Wearable Data Layer
- Message communication using Wearable Data Layer
  
 A two way message communication app for Wear OS that makes use of Wearable data layer. Send/receive messages from your wearable/mobile device.
 
@@ -21,7 +20,6 @@ A two way message communication app for Wear OS that makes use of Wearable data 
 - Send/receive messages from your wearable/mobile device(Two way message communication).
 - Shows the full log of the message history.
 - Message acknowledgment and timeout.
-- Has full crown support for scrolling
 - Supports both round and square Wear OS devices
 
 &nbsp;
