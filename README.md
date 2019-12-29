@@ -1,4 +1,4 @@
-# Message communication using Wearable Data Layer
+# Message communication using Wearable Data Layer - Android/Wear OS
  
 A two way message communication app for Wear OS that makes use of Wearable data layer. Send/receive messages from your wearable/mobile device.
 
