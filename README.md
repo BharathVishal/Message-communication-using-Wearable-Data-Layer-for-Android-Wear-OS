@@ -59,6 +59,6 @@ Android Studio 4.1.1
 
 
 &nbsp;
-© 2019-2020. Developed by Bharath Vishal G (https://github.com/BharathVishal).
+© 2019-2021. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
 Thank you. :smile:
