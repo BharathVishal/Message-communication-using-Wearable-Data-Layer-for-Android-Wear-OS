@@ -10,9 +10,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.databinding.ActivityMainBinding
 import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.nio.charset.StandardCharsets
 import java.util.*
 
@@ -35,17 +35,20 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
     private var messageEvent: MessageEvent? = null
     private var wearableNodeUri: String? = null
 
+    private lateinit var binding: ActivityMainBinding
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         activityContext = this
         wearableDeviceConnected = false
 
 
-        checkwearablesButton.setOnClickListener {
+        binding.checkwearablesButton.setOnClickListener {
             if (!wearableDeviceConnected) {
                 val tempAct: Activity = activityContext as MainActivity
                 AsyncTask.execute {
@@ -63,22 +66,22 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                                         "Wearable device paired and app is open. Tap the \"Send Message to Wearable\" button to send the message to your wearable device.",
                                         Toast.LENGTH_LONG
                                     ).show()
-                                    deviceconnectionStatusTv.text =
+                                    binding.deviceconnectionStatusTv.text =
                                         "Wearable device paired and app is open."
-                                    deviceconnectionStatusTv.visibility = View.VISIBLE
+                                    binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                                     wearableDeviceConnected = true
-                                    sendmessageButton.visibility = View.VISIBLE
+                                    binding.sendmessageButton.visibility = View.VISIBLE
                                 } else {
                                     Toast.makeText(
                                         activityContext,
                                         "A wearable device is paired but the wearable app on your watch isn't open. Launch the wearable app and try again.",
                                         Toast.LENGTH_LONG
                                     ).show()
-                                    deviceconnectionStatusTv.text =
+                                    binding.deviceconnectionStatusTv.text =
                                         "Wearable device paired but app isn't open."
-                                    deviceconnectionStatusTv.visibility = View.VISIBLE
+                                    binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                                     wearableDeviceConnected = false
-                                    sendmessageButton.visibility = View.GONE
+                                    binding.sendmessageButton.visibility = View.GONE
                                 }
                             } else {
                                 Toast.makeText(
@@ -86,11 +89,11 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                                     "No wearable device paired. Pair a wearable device to your phone using the Wear OS app and try again.",
                                     Toast.LENGTH_LONG
                                 ).show()
-                                deviceconnectionStatusTv.text =
+                                binding.deviceconnectionStatusTv.text =
                                     "Wearable device not paired and connected."
-                                deviceconnectionStatusTv.visibility = View.VISIBLE
+                                binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                                 wearableDeviceConnected = false
-                                sendmessageButton.visibility = View.GONE
+                                binding.sendmessageButton.visibility = View.GONE
                             }
                         }
                     } catch (e: Exception) {
@@ -102,13 +105,13 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
 
 
 
-        sendmessageButton.setOnClickListener {
+        binding.sendmessageButton.setOnClickListener {
             if (wearableDeviceConnected) {
-                if (messagecontentEditText?.text!!.isNotEmpty()) {
+                if ( binding.messagecontentEditText?.text!!.isNotEmpty()) {
 
                     val nodeId: String = messageEvent?.sourceNodeId!!
                     // Set the data of the message to be the bytes of the Uri.
-                    val payload: ByteArray = messagecontentEditText?.text.toString().toByteArray()
+                    val payload: ByteArray =  binding.messagecontentEditText?.text.toString().toByteArray()
 
                     // Send the rpc
                     // Instantiates clients without member variables, as clients are inexpensive to
@@ -122,14 +125,14 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                             Log.d("send1", "Message sent successfully")
                             val sbTemp = StringBuilder()
                             sbTemp.append("\n")
-                            sbTemp.append(messagecontentEditText.text.toString())
+                            sbTemp.append(binding.messagecontentEditText.text.toString())
                             sbTemp.append(" (Sent to Wearable)")
                             Log.d("receive1", " $sbTemp")
-                            messagelogTextView?.append(sbTemp)
+                            binding.messagelogTextView?.append(sbTemp)
 
-                            scrollviewText.requestFocus()
-                            scrollviewText.post {
-                                scrollviewText.scrollTo(0, scrollviewText.bottom)
+                            binding.scrollviewText.requestFocus()
+                            binding.scrollviewText.post {
+                                binding.scrollviewText.scrollTo(0,  binding.scrollviewText.bottom)
                             }
                         } else {
                             Log.d("send1", "Message failed.")
@@ -272,32 +275,32 @@ class MainActivity : AppCompatActivity(), DataClient.OnDataChangedListener,
                 )
 
                 val sbTemp = StringBuilder()
-                sbTemp.append(messagelogTextView.text.toString())
+                sbTemp.append( binding.messagelogTextView.text.toString())
                 sbTemp.append("\nWearable device connected.")
                 Log.d("receive1", " $sbTemp")
-                messagelogTextView.text = sbTemp
-                textInputLayout.visibility = View.VISIBLE
+                binding.messagelogTextView.text = sbTemp
+                binding.textInputLayout.visibility = View.VISIBLE
 
-                checkwearablesButton?.visibility = View.GONE
+                binding.checkwearablesButton?.visibility = View.GONE
                 messageEvent = p0
                 wearableNodeUri = p0.sourceNodeId
             } else if (messageEventPath.isNotEmpty() && messageEventPath == MESSAGE_ITEM_RECEIVED_PATH) {
 
                 try {
-                    messagelogTextView.visibility = View.VISIBLE
-                    textInputLayout?.visibility = View.VISIBLE
-                    sendmessageButton?.visibility = View.VISIBLE
+                    binding.messagelogTextView.visibility = View.VISIBLE
+                    binding.textInputLayout?.visibility = View.VISIBLE
+                    binding.sendmessageButton?.visibility = View.VISIBLE
 
                     val sbTemp = StringBuilder()
                     sbTemp.append("\n")
                     sbTemp.append(s)
                     sbTemp.append(" - (Received from wearable)")
                     Log.d("receive1", " $sbTemp")
-                    messagelogTextView.append(sbTemp)
+                    binding.messagelogTextView.append(sbTemp)
 
-                    scrollviewText.requestFocus()
-                    scrollviewText.post {
-                        scrollviewText.scrollTo(0, scrollviewText.bottom)
+                    binding.scrollviewText.requestFocus()
+                    binding.scrollviewText.post {
+                        binding.scrollviewText.scrollTo(0,  binding.scrollviewText.bottom)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
