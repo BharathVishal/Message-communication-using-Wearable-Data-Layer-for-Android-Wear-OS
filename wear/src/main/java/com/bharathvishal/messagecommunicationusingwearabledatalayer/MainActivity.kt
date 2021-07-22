@@ -4,19 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.wearable.activity.WearableActivity
 import android.util.Log
 import android.view.View
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.wear.ambient.AmbientModeSupport
+import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import com.bharathvishal.messagecommunicationusingwearabledatalayer.databinding.ActivityMainBinding
 import com.google.android.gms.wearable.*
 import java.nio.charset.StandardCharsets
 
-class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
+class MainActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider,
+    DataClient.OnDataChangedListener,
     MessageClient.OnMessageReceivedListener,
     CapabilityClient.OnCapabilityChangedListener {
-    var activityContext: Context? = null
+    private var activityContext: Context? = null
 
     private lateinit var binding: ActivityMainBinding
 
@@ -35,25 +38,30 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
     private var messageEvent: MessageEvent? = null
     private var mobileNodeUri: String? = null
 
+    private lateinit var ambientController: AmbientModeSupport.AmbientController
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        // Enables Always-on
-        setAmbientEnabled()
         activityContext = this
+
+        // Enables Always-on
+        ambientController = AmbientModeSupport.attach(this)
 
 
         //On click listener for sendmessage button
         binding.sendmessageButton.setOnClickListener {
             if (mobileDeviceConnected) {
-                if ( binding.messagecontentEditText?.text!!.isNotEmpty()) {
+                if (binding.messagecontentEditText.text!!.isNotEmpty()) {
 
                     val nodeId: String = messageEvent?.sourceNodeId!!
                     // Set the data of the message to be the bytes of the Uri.
-                    val payload: ByteArray =  binding.messagecontentEditText?.text.toString().toByteArray()
+                    val payload: ByteArray =
+                        binding.messagecontentEditText.text.toString().toByteArray()
 
                     // Send the rpc
                     // Instantiates clients without member variables, as clients are inexpensive to
@@ -62,14 +70,14 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
                         Wearable.getMessageClient(activityContext!!)
                             .sendMessage(nodeId, MESSAGE_ITEM_RECEIVED_PATH, payload)
 
-                    binding.deviceconnectionStatusTv?.visibility = View.GONE
+                    binding.deviceconnectionStatusTv.visibility = View.GONE
 
                     sendMessageTask.addOnCompleteListener {
                         if (it.isSuccessful) {
                             Log.d("send1", "Message sent successfully")
                             val sbTemp = StringBuilder()
                             sbTemp.append("\n")
-                            sbTemp.append( binding.messagecontentEditText.text.toString())
+                            sbTemp.append(binding.messagecontentEditText.text.toString())
                             sbTemp.append(" (Sent to mobile)")
                             Log.d("receive1", " $sbTemp")
                             binding.messagelogTextView.append(sbTemp)
@@ -155,9 +163,9 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
 
                             mobileDeviceConnected = true
 
-                            binding.textInputLayout?.visibility = View.VISIBLE
-                            binding.sendmessageButton?.visibility = View.VISIBLE
-                            binding.deviceconnectionStatusTv?.visibility = View.VISIBLE
+                            binding.textInputLayout.visibility = View.VISIBLE
+                            binding.sendmessageButton.visibility = View.VISIBLE
+                            binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                             binding.deviceconnectionStatusTv.text = "Mobile device is connected"
                         } else {
                             Log.d(TAG_MESSAGE_RECEIVED, "Message failed.")
@@ -174,9 +182,9 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
             else if (messageEventPath.isNotEmpty() && messageEventPath == MESSAGE_ITEM_RECEIVED_PATH) {
                 try {
                     binding.messagelogTextView.visibility = View.VISIBLE
-                    binding.textInputLayout?.visibility = View.VISIBLE
-                    binding.sendmessageButton?.visibility = View.VISIBLE
-                    binding.deviceconnectionStatusTv?.visibility = View.GONE
+                    binding.textInputLayout.visibility = View.VISIBLE
+                    binding.sendmessageButton.visibility = View.VISIBLE
+                    binding.deviceconnectionStatusTv.visibility = View.GONE
 
                     val sbTemp = StringBuilder()
                     sbTemp.append("\n")
@@ -224,4 +232,21 @@ class MainActivity : WearableActivity(), DataClient.OnDataChangedListener,
             e.printStackTrace()
         }
     }
+
+    override fun getAmbientCallback(): AmbientCallback = MyAmbientCallback()
+
+    private inner class MyAmbientCallback : AmbientCallback() {
+        override fun onEnterAmbient(ambientDetails: Bundle) {
+            super.onEnterAmbient(ambientDetails)
+        }
+
+        override fun onUpdateAmbient() {
+            super.onUpdateAmbient()
+        }
+
+        override fun onExitAmbient() {
+            super.onExitAmbient()
+        }
+    }
+
 }
