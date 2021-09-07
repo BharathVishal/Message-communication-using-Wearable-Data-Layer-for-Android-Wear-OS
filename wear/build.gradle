@@ -9,8 +9,8 @@ android {
         applicationId "com.bharathvishal.messagecommunicationusingwearabledatalayer"
         minSdkVersion 25
         targetSdkVersion 31
-        versionCode 15
-        versionName "1.2.6"
+        versionCode 18
+        versionName "1.2.7"
     }
 
     buildFeatures {
