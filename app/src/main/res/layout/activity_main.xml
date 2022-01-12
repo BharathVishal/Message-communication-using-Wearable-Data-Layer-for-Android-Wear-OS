@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:keepScreenOn="true">
+        android:layout_below="@+id/appbarlayout"
+        android:layout_margin="8dp"
+        android:background="?ViewLayoutColor"
+        android:elevation="1dp"
+        android:keepScreenOn="true"
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +46,6 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/message_log"
-                    android:textColor="?TextInfoColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -51,7 +68,6 @@
                         android:layout_height="wrap_content"
                         android:scrollbars="vertical"
                         android:text="@string/init"
-                        android:textColor="?TextViewHeaderColor"
                         android:textSize="12sp" />
                 </ScrollView>
             </LinearLayout>
@@ -70,7 +86,6 @@
                     android:gravity="center"
                     android:scrollbars="vertical"
                     android:text="@string/wearable_device_is_connected"
-                    android:textColor="?TextViewHeaderColor"
                     android:textSize="15sp"
                     android:visibility="gone" />
 
@@ -89,7 +104,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/message"
-                    android:textColorHint="?TextViewHeaderColor"
                     android:visibility="gone">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -98,7 +112,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:textColor="?TextInfoColor"
                         android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -117,14 +130,14 @@
 
                 <Button
                     android:id="@+id/checkwearablesButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:scrollbars="vertical"
                     android:text="@string/check_for_connected_wearables"
-                    android:textColor="?TextInfoColor"
+                    android:textAllCaps="false"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -137,7 +150,6 @@
                     android:gravity="center"
                     android:scrollbars="vertical"
                     android:text="@string/send_message_alt"
-                    android:textColor="?TextInfoColor"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
