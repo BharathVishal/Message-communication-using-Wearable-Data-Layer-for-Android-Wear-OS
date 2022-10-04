@@ -9,8 +9,8 @@ android {
         applicationId "com.bharathvishal.messagecommunicationusingwearabledatalayer"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 59
-        versionName "2.3"
+        versionCode 61
+        versionName "2.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     
@@ -39,19 +39,20 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    namespace 'com.bharathvishal.messagecommunicationusingwearabledatalayer'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.5.0'
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.google.android.material:material:1.8.0-alpha01'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
