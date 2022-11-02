@@ -55,8 +55,7 @@ Wear OS 2.x
 
 &nbsp;
 ### Android Studio Version : 
-Android Studio Dolphin | 2021.3.1
-
+Android Studio Dolphin | 2021.3.1 Patch 1
 
 
 &nbsp;
