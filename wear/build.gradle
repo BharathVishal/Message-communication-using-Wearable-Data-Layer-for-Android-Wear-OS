@@ -12,8 +12,8 @@ android {
         applicationId "com.bharathvishal.messagecommunicationusingwearabledatalayer"
         minSdkVersion 25
         targetSdkVersion 33
-        versionCode 78
-        versionName "2.6"
+        versionCode 79
+        versionName "2.7"
         wearAppUnbundled true
     }
 
