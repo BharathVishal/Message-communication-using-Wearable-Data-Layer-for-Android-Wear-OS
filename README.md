@@ -42,10 +42,10 @@ A two way message communication app for Wear OS that makes use of Wearable data 
 &nbsp;
 ### SDK Info : 
 Mobile version
-Min SDK : 23  | Target SDK : 33 | Gradle : 7.3.1  | Kotlin 
+Min SDK : 23  | Target SDK : 33 | Gradle : 7.4.0  | Kotlin 
 
 Wearable version
-Min SDK : 25  | Target SDK : 33 | Gradle : 7.3.1  | Kotlin 
+Min SDK : 25  | Target SDK : 33 | Gradle : 7.4.0  | Kotlin 
 
 
 &nbsp;
@@ -55,7 +55,7 @@ Wear OS 2.x
 
 &nbsp;
 ### Android Studio Version : 
-Android Studio Dolphin | 2021.3.1 Patch 1
+Android Studio Electric Eel | 2022.1.1
 
 
 &nbsp;
