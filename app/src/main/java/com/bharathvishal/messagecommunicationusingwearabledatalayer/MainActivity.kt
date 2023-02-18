@@ -194,7 +194,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                         val result = Tasks.await(sendMessageTask)
                         Log.d(TAG_GET_NODES, "send message result : $result")
                         resBool[0] = true
-                        //Wait for 1000 ms/1 sec for the acknowledgement message
+
+                        //Wait for 700 ms/0.7 sec for the acknowledgement message
                         //Wait 1
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(100)
@@ -206,7 +207,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                         }
                         //Wait 2
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
-                            Thread.sleep(150)
+                            Thread.sleep(250)
                             Log.d(TAG_GET_NODES, "ACK thread sleep 2")
                         }
                         if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
@@ -214,24 +215,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                             return resBool
                         }
                         //Wait 3
-                        if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
-                            Thread.sleep(200)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep 3")
-                        }
-                        if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
-                            resBool[1] = true
-                            return resBool
-                        }
-                        //Wait 4
-                        if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
-                            Thread.sleep(250)
-                            Log.d(TAG_GET_NODES, "ACK thread sleep 4")
-                        }
-                        if (currentAckFromWearForAppOpenCheck == wearableAppCheckPayloadReturnACK) {
-                            resBool[1] = true
-                            return resBool
-                        }
-                        //Wait 5
                         if (currentAckFromWearForAppOpenCheck != wearableAppCheckPayloadReturnACK) {
                             Thread.sleep(350)
                             Log.d(TAG_GET_NODES, "ACK thread sleep 5")

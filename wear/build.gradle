@@ -12,8 +12,8 @@ android {
         applicationId "com.bharathvishal.messagecommunicationusingwearabledatalayer"
         minSdkVersion 25
         targetSdkVersion 33
-        versionCode 80
-        versionName "2.8"
+        versionCode 81
+        versionName "2.9"
         wearAppUnbundled true
     }
 
@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.wear:wear:1.2.0'

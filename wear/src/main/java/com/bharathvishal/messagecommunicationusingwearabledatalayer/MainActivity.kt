@@ -172,10 +172,6 @@ class MainActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProv
                         }
                     }
                 } catch (e: Exception) {
-                    Log.d(
-                        TAG_MESSAGE_RECEIVED,
-                        "Handled in sending message back to the sending node"
-                    )
                     e.printStackTrace()
                 }
             }//emd of if
@@ -203,7 +199,6 @@ class MainActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProv
                 }
             }
         } catch (e: Exception) {
-            Log.d(TAG_MESSAGE_RECEIVED, "Handled in onMessageReceived")
             e.printStackTrace()
         }
     }
