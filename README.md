@@ -59,6 +59,14 @@ Android Studio Electric Eel | 2022.1.1
 
 
 &nbsp;
+
+#### License : 
+[Apache License 2.0](https://github.com/BharathVishal/Message-communication-using-Wearable-Data-Layer-Android-Wear-OS/blob/master/LICENSE)
+&nbsp;
+
+&nbsp;
+
+
 © 2019-2023. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
 Thank you. :smile:
