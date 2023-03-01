@@ -24,7 +24,7 @@ A two way message communication app for Wear OS that makes use of Wearable Data 
 
 &nbsp;
 ### Preview : 
-![Preview](https://github.com/BharathVishal/Message-communication-using-Wearable-Data-Layer/blob/master/Preview/PreviewGif.gif width="150%" height="150")
+![Preview](https://github.com/BharathVishal/Message-communication-using-Wearable-Data-Layer/blob/master/Preview/PreviewGif.gif width="150%" height="150%")
 
 
 &nbsp;
