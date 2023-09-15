@@ -1,4 +1,4 @@
-# Message communication using Wearable Data Layer - Android/Wear OS
+# Message communication using Wearable Data Layer for Android/Wear OS
  
 A two way message communication app for Wear OS that makes use of Wearable Data Layer API. Send/receive messages from your wearable/mobile device.
 
@@ -65,6 +65,12 @@ Android Studio Giraffe | 2022.3.1 Patch 1
 &nbsp;
 
 &nbsp;
+
+####
+Android is a trademark of Google LLC. WEAR OS BY GOOGLE is a trademark of Google LLC.
+
+&nbsp;
+
 
 
 © 2019-2023. Developed by Bharath Vishal G (https://github.com/BharathVishal).
