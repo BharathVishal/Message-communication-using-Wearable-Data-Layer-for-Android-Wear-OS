@@ -45,7 +45,7 @@ Mobile version
 Min SDK : 23  | Target SDK : 34 | Gradle : 8.1.1  | Kotlin 
 
 Wearable version
-Min SDK : 25  | Target SDK : 34 | Gradle : 8.1.1  | Kotlin 
+Min SDK : 25  | Target SDK : 34 | Gradle : 8.1.3  | Kotlin 
 
 
 &nbsp;
@@ -55,7 +55,7 @@ Wear OS 2.x
 
 &nbsp;
 ### Android Studio Version : 
-Android Studio Giraffe | 2022.3.1 Patch 1
+Android Studio Giraffe | 2022.3.1 Patch 3
 
 
 &nbsp;
