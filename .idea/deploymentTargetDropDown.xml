@@ -3,6 +3,9 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="wear">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
             <Target>
@@ -10,16 +13,13 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Pixel_7_Pro_API_34.avd" />
+                  <value value="$USER_HOME$/.android/avd/Medium_Phone_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-12-31T06:13:16.313607Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-04-04T11:28:51.854051Z" />
         </State>
-      </entry>
-      <entry key="wear">
-        <State />
       </entry>
     </value>
   </component>
