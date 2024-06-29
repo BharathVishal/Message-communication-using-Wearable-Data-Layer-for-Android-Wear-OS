@@ -1,2 +1,0 @@
-include ':app', ':wear'
-rootProject.name='Message communication using Wearable Data Layer'
