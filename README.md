@@ -55,7 +55,7 @@ Wear OS 2.x
 
 &nbsp;
 ### Android Studio Version : 
-Android Studio Iguana | 2023.2.1 Patch 1
+Android Studio Koala | 2024.1.1
 
 
 &nbsp;
