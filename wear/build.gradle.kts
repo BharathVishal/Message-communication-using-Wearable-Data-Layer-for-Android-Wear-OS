@@ -7,16 +7,16 @@ plugins {
 
 android {
     namespace = "com.bharathvishal.messagecommunicationusingwearabledatalayer"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.bharathvishal.messagecommunicationusingwearabledatalayer"
         vectorDrawables {
             useSupportLibrary = true
         }
         minSdk = 23
-        targetSdk = 34
-        versionCode = 100
-        versionName = "3.7"
+        targetSdk = 35
+        versionCode = 101
+        versionName = "3.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
@@ -50,7 +50,7 @@ android {
         jvmTarget = "17"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
 
     packaging {
