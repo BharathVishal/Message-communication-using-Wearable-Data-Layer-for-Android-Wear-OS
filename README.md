@@ -42,10 +42,10 @@ A two way message communication app for Wear OS that makes use of Wearable Data 
 &nbsp;
 ### SDK Info : 
 Mobile version
-Min SDK : 23  | Target SDK : 35 | Gradle : 8.6.0  | Kotlin 
+Min SDK : 23  | Target SDK : 35 | Gradle : 8.9.0  | Kotlin 
 
 Wearable version
-Min SDK : 25  | Target SDK : 35 | Gradle : 8.6.0  | Kotlin 
+Min SDK : 25  | Target SDK : 35 | Gradle : 8.9.0  | Kotlin 
 
 
 &nbsp;
@@ -55,7 +55,7 @@ Wear OS 2.x
 
 &nbsp;
 ### Android Studio Version : 
-Android Studio Koala Feature Drop | 2024.1.2
+Android Studio Ladybug | 2024.2.1 Patch 3
 
 
 &nbsp;
@@ -73,7 +73,7 @@ Android is a trademark of Google LLC. WEAR OS BY GOOGLE is a trademark of Google
 
 
 
-© 2019-2024. Developed by Bharath Vishal G (https://github.com/BharathVishal).
+© 2019-2025. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
 Thank you. :slightly_smiling_face:
 
