@@ -21,15 +21,23 @@ package com.bharathvishal.messagecommunicationusingwearabledatalayer
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.bharathvishal.messagecommunicationusingwearabledatalayer.databinding.ActivityMainBinding
 import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.*
+import com.google.android.material.color.DynamicColors
 import kotlinx.coroutines.*
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -58,6 +66,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                enableEdgeToEdge()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -66,6 +82,24 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
         activityContext = this
         wearableDeviceConnected = false
 
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                val viewTempAppBar = findViewById<View>(R.id.appbarlayout);
+                viewTempAppBar.setOnApplyWindowInsetsListener { view, insets ->
+                    val statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars())
+
+                    val nightModeFlags: Int =  (activityContext as MainActivity).resources
+                        .configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                    val isDarkMode = nightModeFlags == Configuration.UI_MODE_NIGHT_YES
+                    val isDynamicTheme = DynamicColors.isDynamicColorAvailable();
+                    // Adjust padding to avoid overlap
+                    view.setPadding(0, statusBarInsets.top, 0, 0)
+                    insets
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         binding.checkwearablesButton.setOnClickListener {
             if (!wearableDeviceConnected) {
