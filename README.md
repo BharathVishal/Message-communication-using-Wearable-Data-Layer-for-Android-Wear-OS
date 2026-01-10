@@ -55,7 +55,8 @@ Wear OS 2.x
 
 &nbsp;
 ### Android Studio Version : 
-Android Studio Narwhal 4 Feature Drop | 2025.1.4
+Android Studio Otter 2 Feature Drop | 2025.2.2 Patch 1
+
 
 
 
@@ -74,7 +75,7 @@ Android is a trademark of Google LLC. WEAR OS BY GOOGLE is a trademark of Google
 
 
 
-© 2019-2025. Developed by Bharath Vishal G (https://github.com/BharathVishal).
+© 2019-2026. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
 Thank you. :slightly_smiling_face:
 
