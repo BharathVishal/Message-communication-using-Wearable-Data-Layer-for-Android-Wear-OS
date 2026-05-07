@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+    buildFeatures.buildConfig = false
     namespace = "com.bharathvishal.messagecommunicationusingwearabledatalayer"
     compileSdk = 36
     defaultConfig {
@@ -17,8 +18,8 @@ android {
         }
         minSdk = 23
         targetSdk = 36
-        versionCode = 125
-        versionName = "4.3"
+        versionCode = 128
+        versionName = "4.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
