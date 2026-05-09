@@ -5,4 +5,5 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.jetbrains.kotlin.kapt) apply false
+    id("com.google.devtools.ksp") version "2.3.7" apply false
 }
